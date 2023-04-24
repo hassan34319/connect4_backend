@@ -443,9 +443,10 @@ def reset():
 @app.route('/move', methods=['POST','GET'])
 def makeMove():
     data = request.get_json()
-    userMove = int(data['move'])
-    print(userMove)
-    if userMove!=[None,None]:
+    userMove = data['move']
+    if userMove!=None:
+        userMove = int(data['move'])
+        print(userMove)
         moveHeights[userMove] += 1
         gameState[BOARD_SIZE_Y - moveHeights[userMove]][userMove] = HUMAN_PLAYER
     computerMove = bestMove(gameState, COMPUTER_PLAYER, HUMAN_PLAYER)
